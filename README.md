@@ -5,6 +5,10 @@
 
 Hashing and signature verification in Clojure without the Ethereum client.
 
+`[com.jamesleonis/pen-of-midas "0.1.0"]`
+
+[![Clojars Project](https://img.shields.io/clojars/v/com.jamesleonis/pen-of-midas.svg)](https://clojars.org/com.jamesleonis/pen-of-midas)
+
 ## Why?
 
 ### Wallets as identity providers
