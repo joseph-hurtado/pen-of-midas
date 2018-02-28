@@ -12,8 +12,7 @@ Hashing and signature verification without the Ethereum client.
 Verifying signatures from Ethereum wallets is a cornerstone of Ethereum's
 security. While the lion's share are transaction signatures, the mechanisms can
 be used in a broad swath of cases. This library implements the keccak SHA3,
-ECRecover, and a signature validator. These combined allow for any signature
-to be verified without running a client or RPC interface.
+ECRecover, and a signature validator without the need for an RPC/IPC client.
 
 ### Practically, it's about DevOps
 
@@ -30,9 +29,7 @@ failure occurs, `nil` is returned instead.
 
 I've included `hex->bytes` and `bytes->hex` to make your lives easier.
 
-I also solved the infamous [Prefix Issue][prefix-issue] with `hash-with-prefix`.
-
-[You're welcome][youre-welcome].
+I also solved the infamous [Prefix Issue][prefix-issue] with `hash-with-prefix`. [You're welcome][youre-welcome].
 
 ### Verify
 
@@ -50,7 +47,7 @@ known wallet address and it will return true or false if all three match.
 ; => true (we hope!)
 ```
 
-### SHA3 (Keccak-256)
+### Keccak-256 (SHA3)
 
 Pretty straightforward. Bytes in, bytes out.
 
@@ -73,7 +70,8 @@ be passed into `key->address` to get the Ethereum wallet address.
 **BEWARE!**
 
 `ecrecover` *always* succeeds in extracting a public key, even if it's not
-the correct key! Always check the key against a known wallet address.
+the correct key! Always check the key against a known wallet address, and
+double-check the message payload hashes.
 
 ```clojure
 (ns your.awesome.project
