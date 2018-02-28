@@ -1,6 +1,6 @@
 # Pen of Midas
 
-> Gussy it up as much as you want, Trebek, What matters is does it work?  
+> Gussy it up as much as you want, Trebek. What matters is does it work?  
 > - "Sean Connery" - Celebrity Jeopardy SNL s24e16
 
 Hashing and signature verification without the Ethereum client.
@@ -19,6 +19,13 @@ ECRecover, and a signature validator without the need for an RPC/IPC client.
 For smaller projects and demos, deploying both an app *and* the go-ethereum
 node starts getting expensive. This removes some of the headache for back-end
 developers and Ops when a small library will suffice.
+
+### The Java Ethereum ecosystem is difficult to navigate from Clojure
+
+I've dug through several existing Ethereum Java implementations, but many were
+large, incomplete, required a `geth` client, or were difficult to integrate.
+This gives you all the tools you need to effectively verify signatures without
+headaches.
 
 ## Usage
 
@@ -100,6 +107,28 @@ double-check the message payload hashes.
     (pen/ecrecover (:signature payload))
     key->address)
 ; => "0x368af29ca2cf40964c454ae92044aa0ff908e3c7"
+```
+
+## Donations
+
+My address is `0x086d9a9012e9a7ff394817de47b8f3faaef3d97b`.
+
+If you like this work and would like to support more of it, throw some ETH my
+way. You can verify it's me like this!
+
+```clojure
+(ns your.awesome.project
+  (:require [pen-of-midas.core :refer [verify hash-with-prefix hex->bytes]))
+
+(let [donation-address "0x086d9a9012e9a7ff394817de47b8f3faaef3d97b"
+      message (str "If you like this work and would like to support more of "
+                   "it, throw some ETH my way. You can verify it's me like this!"
+                   donation-address)
+      signature
+      (str "0xd20cc23c44dad7bd6bf9dd756c9029ec632d98050511784b33353e161cce3d13
+            188053664fad3c48d271d3c7f2c52281759edbf3fe62f5c7c65d342c93c9fd391b")]
+  (verify (hash-with-prefix message) (hex->bytes signature) donation-address))
+; => true
 ```
 
 ## License

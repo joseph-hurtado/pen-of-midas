@@ -44,13 +44,21 @@
           [{:account "0x5ec3bb0e12a32e7f9fc426e750f33372813cfa43"
             :message "deadbeaf"
             :signature
-            (hex->bytes (str "0xab8f376d8c8fd45790fcc5a6c5b8319251109811794fc2e69e6b5026b8a7fcac"
-                             "368f8946eb160ce4ef1b0a9f765f0040c9d9add7ebc50a48b5855c439fa7683d1b"))}
+            (str "0xab8f376d8c8fd45790fcc5a6c5b8319251109811794fc2e69e6b5026b8a7fcac"
+                 "368f8946eb160ce4ef1b0a9f765f0040c9d9add7ebc50a48b5855c439fa7683d1b")}
            {:account "0x5ec3bb0e12a32e7f9fc426e750f33372813cfa43"
             :message "hello-world"
             :signature
-            (hex->bytes (str "0x90f33e2d2eb33a3c72078260af0e835bf3634f7286177a72050b20eafc58c4c3"
-                             "5eecbcfbdebd050eb6698954250f5d6d25b1b0bfc8ff72aa0bc4612c7437b9831b"))}]]
+            (str "0x90f33e2d2eb33a3c72078260af0e835bf3634f7286177a72050b20eafc58c4c3"
+                 "5eecbcfbdebd050eb6698954250f5d6d25b1b0bfc8ff72aa0bc4612c7437b9831b")}
+           {:account "0x086d9a9012e9a7ff394817de47b8f3faaef3d97b"
+            :message
+            (str "If you like this work and would like to support more of "
+                 "it, throw some ETH my way. You can verify it's me like this!"
+                 "0x086d9a9012e9a7ff394817de47b8f3faaef3d97b")
+            :signature
+            (str "0xd20cc23c44dad7bd6bf9dd756c9029ec632d98050511784b33353e161cce3d13
+                 188053664fad3c48d271d3c7f2c52281759edbf3fe62f5c7c65d342c93c9fd391b")}]]
     (testing (str "Verify " message " is from " account)
-      (is (verify (hash-with-prefix message) signature account))
-      (is (= account (key->address (ecrecover (hash-with-prefix message) signature)))))))
+      (is (verify (hash-with-prefix message) (hex->bytes signature) account))
+      (is (= account (key->address (ecrecover (hash-with-prefix message) (hex->bytes signature))))))))

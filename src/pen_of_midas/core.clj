@@ -141,3 +141,14 @@
           (catch NullPointerException _
             (println "Malicious signatures do this. This should not happen")
             false))))))
+
+(comment
+  (let [donation-address "0x086d9a9012e9a7ff394817de47b8f3faaef3d97b"
+        message (str "If you like this work and would like to support more of "
+                     "it, throw some ETH my way. You can verify it's me like this!"
+                     donation-address)
+        signature
+        (str "0xd20cc23c44dad7bd6bf9dd756c9029ec632d98050511784b33353e161cce3d13
+              188053664fad3c48d271d3c7f2c52281759edbf3fe62f5c7c65d342c93c9fd391b")]
+    (verify (hash-with-prefix message) (hex->bytes signature) donation-address))
+  )
