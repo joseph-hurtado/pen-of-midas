@@ -3,7 +3,7 @@
 > Gussy it up as much as you want, Trebek. What matters is does it work?  
 > - "Sean Connery" - Celebrity Jeopardy SNL s24e16
 
-Hashing and signature verification without the Ethereum client.
+Hashing and signature verification in Clojure without the Ethereum client.
 
 ## Why?
 
@@ -14,18 +14,18 @@ security. While the lion's share are transaction signatures, the mechanisms can
 be used in a broad swath of cases. This library implements the keccak SHA3,
 ECRecover, and a signature validator without the need for an RPC/IPC client.
 
+### The Java Ethereum ecosystem is difficult to navigate from Clojure
+
+I've dug through several existing Ethereum Java implementations, but many were
+large, incomplete, required a `geth` client, or were difficult to integrate.
+I wanted a tool to effectively verify signatures without headaches and minimal
+fuss.
+
 ### Practically, it's about DevOps
 
 For smaller projects and demos, deploying both an app *and* the go-ethereum
 node starts getting expensive. This removes some of the headache for back-end
 developers and Ops when a small library will suffice.
-
-### The Java Ethereum ecosystem is difficult to navigate from Clojure
-
-I've dug through several existing Ethereum Java implementations, but many were
-large, incomplete, required a `geth` client, or were difficult to integrate.
-This gives you all the tools you need to effectively verify signatures without
-headaches.
 
 ## Usage
 
@@ -36,7 +36,9 @@ failure occurs, `nil` is returned instead.
 
 I've included `hex->bytes` and `bytes->hex` to make your lives easier.
 
-I also solved the infamous [Prefix Issue][prefix-issue] with `hash-with-prefix`. [You're welcome][youre-welcome].
+I also solved the infamous `eth_sign`/`personal_sign` [Prefix Issue][issue] 
+with `hash-with-prefix`. It takes a string, and spits out a `byte-array` of
+the Keccak hash. [I believe you were trying to say is *thank you*][thank-you?].
 
 ### Verify
 
@@ -138,6 +140,6 @@ Copyright © 2018 James Leonis
 Distributed under the Eclipse Public License either version 1.0 or (at
 your option) any later version.
 
-[prefix-issue]: https://github.com/ethereum/go-ethereum/issues/14794
+[issue]: https://github.com/ethereum/go-ethereum/issues/14794
 
-[youre-welcome]: https://www.youtube.com/watch?v=79DijItQXMM
+[thank-you?]: https://youtu.be/79DijItQXMM?t=4s
