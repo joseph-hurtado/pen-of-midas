@@ -57,8 +57,8 @@
                  "it, throw some ETH my way. You can verify it's me like this!"
                  "0x086d9a9012e9a7ff394817de47b8f3faaef3d97b")
             :signature
-            (str "0xd20cc23c44dad7bd6bf9dd756c9029ec632d98050511784b33353e161cce3d13
-                 188053664fad3c48d271d3c7f2c52281759edbf3fe62f5c7c65d342c93c9fd391b")}]]
+            (str "0xd20cc23c44dad7bd6bf9dd756c9029ec632d98050511784b33353e161cce3d13"
+                 "188053664fad3c48d271d3c7f2c52281759edbf3fe62f5c7c65d342c93c9fd391b")}]]
     (testing (str "Verify " message " is from " account)
       (is (verify (hash-with-prefix message) (hex->bytes signature) account))
       (is (= account (key->address (ecrecover (hash-with-prefix message) (hex->bytes signature))))))))
